@@ -1,0 +1,19 @@
+# .gitignore à la racine
+
+# Ignorer le dossier node_modules pour le client
+/client/node_modules
+/client/build
+
+# Ignorer le dossier node_modules pour le serveur
+/server/node_modules
+
+# Ignorer les fichiers log
+*.log
+
+# Ignorer les fichiers de l'éditeur
+.vscode/
+.idea/
+
+# Ignorer les fichiers système
+.DS_Store
+Thumbs.db
