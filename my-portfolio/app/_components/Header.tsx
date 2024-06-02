@@ -8,7 +8,7 @@ import Link from "next/link";
 
 export const Header = () => {
   return (
-    <header className="sticky top-0 py-4">
+    <header className="sticky top-0 py-4 backdrop-blur-sm">
       <Section className="flex items-baseline">
         <h1 className="text-lg font-bold text-primary">
           david-meguira.vercel.com

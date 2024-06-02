@@ -2,6 +2,10 @@ import { Section } from "./Section";
 import { ComponentPropsWithoutRef } from "react";
 import { cn } from "@/lib/utils";
 import { GithubIcon } from "./icons/GithubIcon";
+import { ESGIicon } from "./icons/ESGIicon";
+import { TailwindIcon } from "./icons/TailwindIcon";
+import { LaravelIcon } from "./icons/LaravelIcon";
+import { NextIcon } from "./icons/NextIcon";
 import Link from "next/link";
 
 const Code = ({ className, ...props }: ComponentPropsWithoutRef<"span">) => {
@@ -29,13 +33,14 @@ export const Hero = () => {
           with technologies like
           <Code className="inline-flex items-center gap-1">
             {" "}
-            <GithubIcon size={12} className="inline" />
+            <NextIcon size={12} className="inline" />
             Next.js
           </Code>
-          ,<Code>Laravel</Code>,<Code>Tailwind CSS</Code> and some more.
+          ,<Code><LaravelIcon size={12} className="inline" />Laravel</Code>,
+          <Code><TailwindIcon size={12} className="inline" />Tailwind CSS</Code> and some more.
           Currently studying Web Ingeneering at
           <a href="https://www.esgi.fr/" target="_blank" rel="noopener noreferrer">
-            <Code>ESGI</Code>
+            <Code><ESGIicon size={24} className="inline" /></Code>
           </a>.
           Living in Paris, France.
         </p>
