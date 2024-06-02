@@ -37,12 +37,14 @@ export const Hero = () => {
             Next.js
           </Code>
           ,<Code><LaravelIcon size={12} className="inline" />Laravel</Code>,
-          <Code><TailwindIcon size={12} className="inline" />Tailwind CSS</Code> and some more.
+          <Code><TailwindIcon size={12} className="inline" />Tailwind CSS</Code> and others.
           Currently studying Web Ingeneering at
           <a href="https://www.esgi.fr/" target="_blank" rel="noopener noreferrer">
             <Code><ESGIicon size={24} className="inline" /></Code>
           </a>.
-          Living in Paris, France.
+          Living in Paris, 
+          <Code><img src="https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/FR.svg" width="20"
+          className="inline" /> France</Code>
         </p>
       </div>
       <div className="flex-1 max-md:m-auto ml-auto">
