@@ -15,11 +15,21 @@ export const Header = () => {
           david-meguira.vercel.com
         </h1> */}
         <nav className="flex gap-4">
-          <a href="#hero" className="text-primary">Home</a>
-          <a href="#projects" className="text-primary">Projects</a>
-          <a href="#skills" className="text-primary">Skills</a>
-          <a href="#about-me" className="text-primary">About Me</a>
-          <a href="#contact" className="text-primary">Contact</a>
+        <a href="#hero" className="text-xs sm:text-base text-primary">
+            Home
+          </a>
+          <a href="#projects" className="text-xs sm:text-base text-primary">
+            Projects
+          </a>
+          <a href="#skills" className="text-xs sm:text-base text-primary">
+            Skills
+          </a>
+          <a href="#about-me" className="text-xs sm:text-base text-primary">
+            About Me
+          </a>
+          <a href="#contact" className="text-xs sm:text-base text-primary">
+            Contact
+          </a>
         </nav>
         <div className="flex-1" />
         <ul className="flex items-center gap-2">
