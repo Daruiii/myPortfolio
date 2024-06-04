@@ -12,7 +12,7 @@ const Code = ({ className, ...props }: ComponentPropsWithoutRef<"span">) => {
   return (
     <span
       className={cn(
-        "bg-accent/30 hover:bg-accent/50 font-mono transition-colors rounded-sm px-1 py-0.5 text-primary ms-1 me-1",
+        "bg-accent/30 hover:bg-accent/50 font-mono transition-colors rounded-sm px-1 py-0.5 text-primary ms-1 me-1 cursor-pointer",
         className
       )}
       {...props}
