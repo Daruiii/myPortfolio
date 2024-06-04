@@ -29,22 +29,22 @@ export const Hero = () => {
         </h2>
         <h3 className="text-3xl font-caption">Full Stack Developer</h3>
         <p className="text-base">
-          I love creating beautiful and functional websites and applications
-          with technologies like
+        Passionate about crafting beautiful and functional websites and applications using technologies like 
           <Code className="inline-flex items-center gap-1">
             {" "}
             <NextIcon size={12} className="inline" />
             Next.js
           </Code>
-          ,<Code><LaravelIcon size={12} className="inline" />Laravel</Code>,
-          <Code><TailwindIcon size={12} className="inline" />Tailwind CSS</Code> and others.
-          Currently studying Web Ingeneering at
+          ,<Code><LaravelIcon size={12} className="inline" />Laravel</Code> and <br/>
+          <Code><TailwindIcon size={12} className="inline" />Tailwind CSS</Code>.
+          Currently pursuing a degree in Web Engineering at
           <a href="https://www.esgi.fr/" target="_blank" rel="noopener noreferrer">
             <Code><ESGIicon size={24} className="inline"/></Code>
           </a>.
-          Living in Paris, 
+          Based in Paris, 
           <Code><img src="https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/FR.svg" width="20"
-          className="inline" /> France</Code>
+          className="inline" /> France</Code>. 
+          Actively seeking an alternance starting September 2024.
         </p>
       </div>
       <div className="flex-1 max-md:m-auto ml-auto">

@@ -58,6 +58,12 @@ const config = {
           foreground: "hsl(var(--card-foreground))",
         },
       },
+      screens: {
+        'md': '768px',
+      },
+      position: {
+        'sticky-md': 'sticky',
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
