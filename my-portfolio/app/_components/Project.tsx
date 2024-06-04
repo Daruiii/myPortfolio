@@ -73,7 +73,7 @@ export const Project = (
           <p className="text-xs p-1 bg-popover text-ring border border-ring rounded-full hover:shadow-lg cursor-default">
             {startDate} - {endDate}
           </p>
-          <div className="flex gap-1 items-center justify-center bg-input rounded-md p-1 w-12 cursor-default border border-accent">
+          <div className="flex gap-1 items-center justify-center bg-ring rounded-md p-1 w-12 cursor-default border border-accent">
             <p className="text-black font-bold text-xs">{teamSize}</p>
             <svg
               width="16px"
