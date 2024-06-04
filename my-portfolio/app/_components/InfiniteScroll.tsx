@@ -1,27 +1,49 @@
-import React, { ComponentPropsWithoutRef } from 'react';
+"use client";
+
+import React, { useEffect, useRef } from 'react';
+import { motion, useAnimation } from 'framer-motion';
+import { ComponentPropsWithoutRef } from 'react';
 import { cn } from "@/lib/utils";
-import './InfiniteScroll.css';
 
 interface InfiniteScrollProps extends ComponentPropsWithoutRef<'div'> {
-  speed?: number; // en secondes, plus le nombre est petit, plus la vitesse est rapide
-  direction?: 'left' | 'right'; // direction du défilement
+  speed?: number; // in seconds
+  direction?: 'left' | 'right'; // scroll direction
 }
 
-export const InfiniteScroll: React.FC<InfiniteScrollProps> = ({ children, speed = 30, direction = 'left', className, ...props }) => {
-    const containerStyle = {
-      animationName: direction === 'left' ? 'scrollLeft' : 'scrollRight',
-      animationDuration: `${speed}s`,
-      animationIterationCount: 'infinite',
-      animationTimingFunction: 'linear',
+export const InfiniteScroll: React.FC<InfiniteScrollProps> = ({ children, speed = 20, direction = 'left', className, ...props }) => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const controls = useAnimation();
+
+  useEffect(() => {
+    const scrollWidth = scrollRef.current ? scrollRef.current.scrollWidth / 2 : 0;
+    const animateScroll = () => {
+      controls.set({ x: direction === 'left' ? 0 : -scrollWidth });
+      controls.start({
+        x: direction === 'left' ? -scrollWidth : 0,
+        transition: {
+          x: {
+            repeat: Infinity,
+            repeatType: 'loop',
+            duration: speed,
+            ease: 'linear',
+          },
+        },
+      });
     };
-  
-    return (
-      <div className={cn("scroll-container", className)} {...props}>
-        <div className="scroll-content" style={containerStyle}>
-          {children}
-          {children}
-          {children}
-        </div>
-      </div>
-    );
-  };
+    animateScroll();
+  }, [controls, speed, direction]);
+
+  return (
+    <div className={cn("overflow-hidden relative w-full flex", className)} {...props}>
+      <motion.div
+        ref={scrollRef}
+        className="flex gap-12"
+        animate={controls}
+        style={{ display: 'flex', width: 'max-content' }}
+      >
+        {children}
+        {children} {/* Duplicate the children for smooth looping */}
+      </motion.div>
+    </div>
+  );
+};

@@ -65,31 +65,37 @@ const skillsHardware = [
 ];
 
 export const Skills = () => {
-    return (
-      <Section className="flex flex-col items-start space-y-8">
-        <h2 className="font-caption font-bold text-5xl text-primary">
-          My Skills
-        </h2>
-        <div className="overflow-hidden flex flex-row items-center justify-center bg-popover p-4 rounded-lg max-w-full h-16">
+  return (
+    <Section className="flex flex-col items-start space-y-8">
+      <h2 className="font-caption font-bold text-5xl text-primary">
+        My Skills
+      </h2>
+      <div className="overflow-hidden flex flex-row items-center justify-center bg-popover p-4 rounded-lg max-w-full h-16">
         <InfiniteScroll speed={20} direction="left">
-                {skillsLanguages.map((skill, index) => (
-                <Skill key={index} {...skill} />
-                ))}
-                {skillsFrameworks.map((skill, index) => (
-                    <Skill key={index} {...skill} />
-                ))}
+          {skillsLanguages.map((skill, index) => (
+            <Skill key={index} {...skill} />
+          ))}
+          {skillsFrameworks.map((skill, index) => (
+            <Skill key={index} {...skill} />
+          ))}
+          {skillsDatabases.map((skill, index) => (
+            <Skill key={index} {...skill} />
+          ))}
+          {skillsHardware.map((skill, index) => (
+            <Skill key={index} {...skill} />
+          ))}
         </InfiniteScroll>
-        </div>
-        <div className="overflow-hidden flex flex-row items-center justify-center bg-popover p-4 rounded-lg max-w-full h-16">
+      </div>
+      <div className="overflow-hidden flex flex-row items-center justify-center bg-popover p-4 rounded-lg max-w-full h-16">
         <InfiniteScroll speed={20} direction="right">
-                {skillsLibraries.map((skill, index) => (
-                <Skill key={index} {...skill} />
-                ))}
-                {skillsTemplating.map((skill, index) => (
-                    <Skill key={index} {...skill} />
-                ))}
+          {skillsLibraries.map((skill, index) => (
+            <Skill key={index} {...skill} />
+          ))}
+          {skillsTemplating.map((skill, index) => (
+            <Skill key={index} {...skill} />
+          ))}
         </InfiniteScroll>
-        </div>
-      </Section>
-    );
-  };
+      </div>
+    </Section>
+  );
+};
