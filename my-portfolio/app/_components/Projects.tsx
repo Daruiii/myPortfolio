@@ -25,10 +25,10 @@ export const Projects = () => {
         image="/images/MathsManager.png"
         name="Maths Manager"
         logo=""
-        description="Maths Manager promet d’être le compagnon indispensable pour les élèves de terminale, 
-        en les aidant à maîtriser les mathématiques de manière structurée, engageante et efficace.
-        Maths Manager permet de pratiquer et de réviser les mathématiques grâce à des exercices, des devoirs surveillés, 
-        des quizz et des résumés organisés par chapitres et sous-chapitres."
+        description="Maths Manager promises to be an indispensable companion for high school seniors,
+         helping them master mathematics in a structured, engaging, and effective manner.
+          Maths Manager allows for practicing and revising mathematics through exercises, 
+          supervised homework, quizzes, and summaries organized by chapters and sub-chapters."
         startDate="March 2024"
         endDate="May 2024"
         technologies={[
@@ -70,8 +70,8 @@ export const Projects = () => {
         description="MatchDay Extension,
         the first version of MatchDay, only 5 french teams are available, like in the app, you can see the upcoming and past matches of the teams,
          and get the details of the match or the team."
-        startDate="April 2024"
-        endDate="May 2024"
+        startDate="April 2023"
+        endDate="May 2023"
         technologies={[
             { name: 'React', logo: <ReactIcon size={12} className="text-foreground" /> },
             { name: 'PandaScore API', logo: <PandaScoreIcon size={12} className="text-foreground" /> },

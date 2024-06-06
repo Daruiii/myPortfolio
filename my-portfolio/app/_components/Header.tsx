@@ -27,9 +27,6 @@ export const Header = () => {
           <a href="#about-me" className="text-xs sm:text-base text-primary">
             About Me
           </a>
-          <a href="#contact" className="text-xs sm:text-base text-primary">
-            Contact
-          </a>
         </nav>
         <div className="flex-1" />
         <ul className="flex items-center gap-2">
