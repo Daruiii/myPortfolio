@@ -15,7 +15,7 @@ export const EducationAndExperiences = () => {
   const experiences = [
     {
       key: '1', // Utilisez une chaîne de caractères pour la clé
-      company: "Tessi",
+      company: { name: "Tessi", logo: "/images/logo/tessiLogo.png" },
       role: "Apprentice Developer",
       startDate: "March 2022",
       endDate: "October 2023",
@@ -83,7 +83,7 @@ export const EducationAndExperiences = () => {
   const educations = [
     {
       key: '1', // Utilisez une chaîne de caractères pour la clé
-      institution: "Etna",
+      institution: { name: "Etna", logo: "/images/logo/etnaLogo.png"},
       degree: "RNCP Level 5",
       field: "Web Development",
       startDate: "September 2021",
@@ -93,7 +93,7 @@ export const EducationAndExperiences = () => {
     },
     {
       key: '2', // Utilisez une chaîne de caractères pour la clé
-      institution: "René Cassin",
+      institution: { name: "René Cassin", logo: ""},
       degree: "High School Diploma",
       field: "STI2D",
       startDate: "September 2020",
@@ -109,7 +109,7 @@ export const EducationAndExperiences = () => {
         <div>
           <h2 className="text-2xl font-semibold mb-4">Experience</h2>
           {experiences.map(({ key, ...exp }) => (
-            <div key={key} className="mb-6"> {/* Ajoutez la clé ici */}
+            <div key={key} className="mb-6">
               <Experience {...exp} />
             </div>
           ))}
@@ -117,7 +117,7 @@ export const EducationAndExperiences = () => {
         <div>
           <h2 className="text-2xl font-semibold mb-4">Education</h2>
           {educations.map(({ key, ...edu }) => (
-            <div key={key} className="mb-6"> {/* Ajoutez la clé ici */}
+            <div key={key} className="mb-6">
               <Education {...edu} />
             </div>
           ))}

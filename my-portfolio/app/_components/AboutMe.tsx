@@ -1,5 +1,6 @@
 import { Section } from './Section';
 import { EducationAndExperiences } from './EducationAndExperiences';
+// import { CareerGoals } from './CareerGoals';
 
 export const AboutMe = () => {
   return (
