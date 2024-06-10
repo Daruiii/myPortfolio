@@ -14,6 +14,7 @@ import { JsonIcon } from "./icons/JsonIcon";
 export const EducationAndExperiences = () => {
   const experiences = [
     {
+      key: '1', // Utilisez une chaîne de caractères pour la clé
       company: "Tessi",
       role: "Apprentice Developer",
       startDate: "March 2022",
@@ -76,11 +77,12 @@ export const EducationAndExperiences = () => {
         "Autonomy",
         "Self-discipline",
       ],
-    }
+    },
   ];
 
   const educations = [
     {
+      key: '1', // Utilisez une chaîne de caractères pour la clé
       institution: "Etna",
       degree: "RNCP Level 5",
       field: "Web Development",
@@ -90,6 +92,7 @@ export const EducationAndExperiences = () => {
         "Studied web development, software architecture, and project management. Developed a variety of web applications and services using modern technologies and methodologies.",
     },
     {
+      key: '2', // Utilisez une chaîne de caractères pour la clé
       institution: "René Cassin",
       degree: "High School Diploma",
       field: "STI2D",
@@ -105,17 +108,17 @@ export const EducationAndExperiences = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div>
           <h2 className="text-2xl font-semibold mb-4">Experience</h2>
-          {experiences.map((exp, index) => (
-            <div className="mb-6">
-              <Experience key={index} {...exp} />
+          {experiences.map(({ key, ...exp }) => (
+            <div key={key} className="mb-6"> {/* Ajoutez la clé ici */}
+              <Experience {...exp} />
             </div>
           ))}
         </div>
         <div>
           <h2 className="text-2xl font-semibold mb-4">Education</h2>
-          {educations.map((edu, index) => (
-            <div className="mb-6">
-            <Education key={index} {...edu} />
+          {educations.map(({ key, ...edu }) => (
+            <div key={key} className="mb-6"> {/* Ajoutez la clé ici */}
+              <Education {...edu} />
             </div>
           ))}
         </div>
