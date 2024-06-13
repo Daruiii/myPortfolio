@@ -15,7 +15,7 @@ export const Header = () => {
           david-meguira.vercel.com
         </h1> */}
         <nav className="flex gap-4">
-        <a href="#hero" className="text-xs sm:text-base text-primary">
+          <a href="#hero" className="text-xs sm:text-base text-primary">
             Home
           </a>
           <a href="#projects" className="text-xs sm:text-base text-primary">
@@ -31,17 +31,41 @@ export const Header = () => {
         <div className="flex-1" />
         <ul className="flex items-center gap-2">
           <Link href="https://github.com/Daruiii" passHref legacyBehavior>
-            <a target="_blank" rel="noopener noreferrer" className={cn(buttonVariants({ variant: "outline" }), "size-6 p-0")}>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cn(
+                buttonVariants({ variant: "outline" }),
+                "size-6 p-0"
+              )}
+            >
               <GithubIcon size={12} className="text-foreground" />
             </a>
           </Link>
-          <Link href="https://www.linkedin.com/in/david-meguira-aa6636222/" passHref legacyBehavior>
-            <a target="_blank" rel="noopener noreferrer" className={cn(buttonVariants({ variant: "outline" }), "size-6 p-0")}>
+          <Link
+            href="https://www.linkedin.com/in/david-meguira-aa6636222/"
+            passHref
+            legacyBehavior
+          >
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cn(
+                buttonVariants({ variant: "outline" }),
+                "size-6 p-0"
+              )}
+            >
               <LinkedinIcon size={12} className="text-foreground" />
             </a>
           </Link>
           <Link href="mailto:davidmeguira6@gmail.com" passHref legacyBehavior>
-            <a target="_blank" rel="noopener noreferrer" className={cn(buttonVariants({ variant: "outline" }), "size-6 p-0")}>
+            <a
+              rel="noopener noreferrer"
+              className={cn(
+                buttonVariants({ variant: "outline" }),
+                "size-6 p-0"
+              )}
+            >
               <EmailIcon size={12} className="text-foreground" />
             </a>
           </Link>
