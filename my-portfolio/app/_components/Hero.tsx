@@ -5,6 +5,7 @@ import { ESGIicon } from "./icons/ESGIicon";
 import { TailwindIcon } from "./icons/TailwindIcon";
 import { LaravelIcon } from "./icons/LaravelIcon";
 import { NextIcon } from "./icons/NextIcon";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
@@ -99,12 +100,13 @@ export const Hero = () => {
         </ul>
       </div>
       <div className="flex-1 max-md:m-auto ml-auto">
-        <img
-          src="https://media.licdn.com/dms/image/C4E03AQFLsbWIytHeyg/profile-displayphoto-shrink_800_800/0/1644877482010?e=1723075200&v=beta&t=EjqtNqVFoSdh6bHVGIgUg4DTtu_AO4O8U1NwJEvwX4U"
-          alt="Hero Image"
-          className="w-full h-auto max-w-xs rounded-full max-md:w-56"
-        />
-      </div>
+  <img
+    src="/images/PhotoCV.jpeg"
+    alt="Hero Image"
+    style={{ width: '200px', height: '200px', objectFit: 'cover' }} // Utilisez des styles en ligne pour plus de contrôle
+    className="rounded-full"
+  />
+</div>
     </Section>
   );
 };
