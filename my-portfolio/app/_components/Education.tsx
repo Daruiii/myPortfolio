@@ -70,7 +70,7 @@ export const Education = (
                 )}
               </button>
           </div>
-          <p className="text-xs font-semibold text-border">
+          <p className="text-xs font-semibold">
             {degree} in {field}
           </p>
           </div>

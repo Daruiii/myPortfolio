@@ -43,7 +43,7 @@ export const Header = () => {
             </a>
           </Link>
           <Link
-            href="https://www.linkedin.com/in/david-meguira-aa6636222/"
+            href="https://www.linkedin.com/in/david-meguira/"
             passHref
             legacyBehavior
           >

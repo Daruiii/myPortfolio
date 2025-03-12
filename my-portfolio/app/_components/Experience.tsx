@@ -67,7 +67,7 @@ export const Experience = (
                 )}
               </button>
             </div>
-            <h3 className="text-xs font-semibold text-border">{role}</h3>
+            <h3 className="text-xs font-semibold">{role}</h3>
           </div>
         </div>
         {showDetails && (

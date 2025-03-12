@@ -16,7 +16,7 @@ export const EducationAndExperiences = () => {
     {
       key: '1', // Utilisez une chaîne de caractères pour la clé
       company: { name: "Tessi", logo: "/images/logo/tessiLogo.png" },
-      role: "Apprentice Developer",
+      role: "Fullstack Developer",
       startDate: "March 2022",
       endDate: "October 2023",
       description:
