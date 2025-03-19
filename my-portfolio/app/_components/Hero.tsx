@@ -27,10 +27,12 @@ export const Hero = () => {
   return (
     <Section className="flex max-md:flex-col items-start gap-4">
       <div className="flex-1 max-md:m-auto ml-auto sticky-md md:sticky top-16">
-        <img
+        <Image
           src="/images/HeroPics.JPEG"
           alt="Image Héro"
-          style={{ width: "200px", height: "200px", objectFit: "cover" }}
+          width={200}
+          height={200}
+          objectFit="cover"
           className="rounded-full"
         />
       </div>
@@ -61,7 +63,7 @@ export const Hero = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <strong className="text-primary underline"> l&#39;ESGI</strong>
+            <strong className="text-primary underline"> l'ESGI</strong>
           </a>
           {" "}à Paris, je suis à la recherche d'une <strong>alternance</strong> pour <strong>Septembre 2025</strong>.
         </p>
