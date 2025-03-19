@@ -57,7 +57,7 @@ export const Hero = () => {
             <NodeJSIcon size={12} className="inline" />
             Node.js
           </Code>
-            . Currently pursuing a Master's degree in Web Engineering at
+            . Currently pursuing a Master&apos;s degree in Web Engineering at
           <a
             href="https://www.esgi.fr/"
             target="_blank"
