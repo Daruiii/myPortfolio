@@ -42,7 +42,7 @@ export const Hero = () => {
         </h2>
         <h3 className="text-3xl font-caption"><strong>Développeur Full Stack</strong></h3>
         <p className="text-base">
-          <strong>Passionné</strong> par la création de sites web et d&lsquoapplications esthétiques et fonctionnelles en utilisant des technologies telles que
+            <strong>Passionné</strong> par la création de sites web et d&#39;applications esthétiques et fonctionnelles en utilisant des technologies telles que
           <Code className="inline-flex items-center gap-1">
             <NextIcon size={12} className="inline" />
             <strong>Next.js</strong>
@@ -63,9 +63,9 @@ export const Hero = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <strong className="text-primary underline"> l'ESGI</strong>
+            <strong className="text-primary underline"> l&#39;ESGI</strong>
           </a>
-          {" "}à Paris, je suis à la recherche d'une <strong>alternance</strong> pour <strong>Septembre 2025</strong>.
+          {" "}à Paris, je suis à la recherche d&#39;une <strong>alternance</strong> pour <strong>Septembre 2025</strong>.
         </p>
         <ul className="flex items-center gap-2 w-full justify-end">
           <Link href="/CV2025FR.pdf" passHref legacyBehavior>
