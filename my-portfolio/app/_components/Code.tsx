@@ -10,7 +10,7 @@ export const Code = ({ logo, name, className, ...props }: CodeProps) => {
   return (
     <span
       className={cn(
-        "bg-accent/30 hover:bg-accent/50 font-mono transition-colors rounded-sm px-1 py-0.5 text-primary ms-1 me-1 cursor-pointer flex items-center gap-1",
+        "bg-accent/30 hover:bg-accent/50 font-mono transition-colors rounded-sm px-1 py-0.5 text-primary ms-1 me-1 flex items-center gap-1",
         className
       )}
       {...props}

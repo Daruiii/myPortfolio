@@ -15,6 +15,29 @@ export const EducationAndExperiences = () => {
   const experiences = [
     {
       key: '1', // Utilisez une chaîne de caractères pour la clé
+      company: { name: "Officéo", logo: "/images/logo/tessiLogo.png" },
+      role: "Growth Engineer",
+      startDate: "September 2024",
+      endDate: "September 2025",
+      description:
+        "During my internship at Tessi, I worked on the development of a web application for managing and analyzing data. I was responsible for creating a customizable graph generation interface, integrating multiple micro-services, and developing a versatile XML-JSON converter.",
+      technologies: [
+        {
+          name: "JavaScript",
+          logo: <JavascriptIcon size={12} className="text-foreground" />,
+        },
+        {
+          name: "Java",
+          logo: <JavaIcon size={12} className="text-foreground" />,
+        },
+      ],
+      skillsWorkedOn: [
+        "Backend Development",
+        "Frontend Development",
+      ], 
+    },
+    {
+      key: '2', // Utilisez une chaîne de caractères pour la clé
       company: { name: "Tessi", logo: "/images/logo/tessiLogo.png" },
       role: "Fullstack Developer",
       startDate: "March 2022",
@@ -83,6 +106,16 @@ export const EducationAndExperiences = () => {
   const educations = [
     {
       key: '1', // Utilisez une chaîne de caractères pour la clé
+      institution: { name: "ESGI", logo: "/images/logo/etnaLogo.png"},
+      degree: "RNCP Level 6",
+      field: "Web Development",
+      startDate: "September 2024",
+      endDate: "July 2025",
+      description:
+        "Studied web development, software architecture, and project management. Developed a variety of web applications and services using modern technologies and methodologies.",
+    },
+    {
+      key: '2', // Utilisez une chaîne de caractères pour la clé
       institution: { name: "Etna", logo: "/images/logo/etnaLogo.png"},
       degree: "RNCP Level 5",
       field: "Web Development",
@@ -92,7 +125,7 @@ export const EducationAndExperiences = () => {
         "Studied web development, software architecture, and project management. Developed a variety of web applications and services using modern technologies and methodologies.",
     },
     {
-      key: '2', // Utilisez une chaîne de caractères pour la clé
+      key: '3', // Utilisez une chaîne de caractères pour la clé
       institution: { name: "René Cassin", logo: ""},
       degree: "High School Diploma",
       field: "STI2D",

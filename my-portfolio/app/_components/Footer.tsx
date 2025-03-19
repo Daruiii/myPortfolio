@@ -20,7 +20,7 @@ export const Footer = () => {
               <GithubIcon size={24} />
             </a>
           </Link>
-          <Link href="https://www.linkedin.com/in/david-meguira-aa6636222/" passHref legacyBehavior>
+          <Link href="https://www.linkedin.com/in/david-meguira/" passHref legacyBehavior>
             <a target="_blank" rel="noopener noreferrer" className="text-[var(--primary)]">
               <LinkedinIcon size={24} />
             </a>

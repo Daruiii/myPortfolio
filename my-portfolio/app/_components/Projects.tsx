@@ -20,13 +20,16 @@ export const Projects = () => {
       <h2 className="font-caption font-bold text-5xl text-primary">Projects</h2>
       <div className="space-y-16">
         <Project
-          image="/images/MathsManager.png"
+          image=""
+          images={[
+            "/images/projects/MathsManager.png",
+            "/images/projects/MathsManager2.png",
+            "/images/projects/MathsManager3.png",
+            "/images/projects/MathsManager4.png",
+          ]}
           name="Maths Manager"
           logo=""
-          description="Maths Manager promises to be an indispensable companion for high school seniors,
-         helping them master mathematics in a structured, engaging, and effective manner.
-          Maths Manager allows for practicing and revising mathematics through exercises, 
-          supervised homework, quizzes, and summaries organized by chapters and sub-chapters."
+          description="Maths Manager is an <strong>innovative</strong> and <strong>indispensable</strong> platform for high school seniors and beyond, helping them master mathematics in a <strong>structured</strong>, <strong>engaging</strong>, and <strong>effective</strong> manner. It allows students to practice and review mathematics through <strong>exercises</strong>, <strong>supervised homework</strong>, <strong>quizzes</strong>, and summaries organized by chapters and sub-chapters. Initially <strong>sold</strong> and <strong>used</strong> by a private tutor, Maths Manager evolves to adapt to multiple teachers with advanced <strong>management</strong> and <strong>pedagogical customization</strong> features. Developed with <strong>Laravel</strong> and <strong>Vite</strong>, this platform also allows teachers to manage their students and offer exercises, supervised homework, and interactive quizzes."
           startDate="March 2024"
           endDate="May 2024"
           technologies={[
@@ -57,13 +60,14 @@ export const Projects = () => {
           align="left"
         />
         <Project
-          image="/images/MatchDayApp.png"
+          image=""
+          images={[
+            "/images/projects/MatchDayApp.png",
+            "/images/projects/MatchDayApp2.png",
+          ]}
           name="MatchDay App"
           logo="/images/logo/MatchDayLogo.png"
-          description="MatchDay, 
-        your ultimate esports companion, brings you the thrill of tracking multiple teams effortlessly. With the intuitive PandaScore API integration, 
-        add teams seamlessly, 
-        customize colors, and stay engaged with upcoming and past events."
+          description="MatchDay est votre <strong>compagnon ultime</strong> pour l'esport, vous permettant de suivre facilement l'actualité de plusieurs équipes. Grâce à l'intégration intuitive de l'<strong>API PandaScore</strong>, ajoutez des équipes sans effort, personnalisez les couleurs et restez informé des événements à venir et passés. Développée en <strong>React Native</strong>, cette application mobile est également disponible en version extension Chrome en React. Installée par <strong>plus de 100 utilisateurs</strong> sur le Google Play Store, MatchDay a été développée en guise de <strong>test technique</strong>."
           startDate="October 2023"
           endDate="January 2024"
           technologies={[
@@ -83,7 +87,8 @@ export const Projects = () => {
         />
 
         <Project
-          image="/images/MatchDayExt.png"
+          image="/images/projects/MatchDayExt.png"
+          images={[]}
           name="MatchDay Extension"
           logo=""
           description="MatchDay Extension,
@@ -108,7 +113,8 @@ export const Projects = () => {
         />
 
         <Project
-          image="/images/CheckingSystem.png"
+          image="/images/projects/CheckingSystem.png"
+          images={[]}
           name="Checking System"
           logo="/images/logo/logoCheckingSystem.png"
           description="Checking System is an advanced attendance platform for companies and schools. 
