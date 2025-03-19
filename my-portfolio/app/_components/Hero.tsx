@@ -15,7 +15,7 @@ const Code = ({ className, ...props }: ComponentPropsWithoutRef<"span">) => {
   return (
     <span
       className={cn(
-        "bg-accent/30 hover:bg-accent/50 font-mono transition-colors rounded-sm px-1 py-0.5 text-primary ms-1 me-1",
+        "bg-accent/30 hover:bg-accent/50 font-mono transition-colors rounded-sm px-1 py-0.5 text-primary ms-1 me-1 whitespace-nowrap",
         className
       )}
       {...props}
@@ -26,55 +26,44 @@ const Code = ({ className, ...props }: ComponentPropsWithoutRef<"span">) => {
 export const Hero = () => {
   return (
     <Section className="flex max-md:flex-col items-start gap-4">
-      <div className="flex-1 max-md:m-auto ml-auto">
+      <div className="flex-1 max-md:m-auto ml-auto sticky-md md:sticky top-16">
         <img
           src="/images/HeroPics.JPEG"
-          alt="Hero Image"
+          alt="Image Héro"
           style={{ width: "200px", height: "200px", objectFit: "cover" }}
           className="rounded-full"
         />
       </div>
       <div className="flex-[2] flex flex-col gap-2">
         <h2 className="font-caption font-bold text-5xl text-primary">
-          David Meguira
+          <strong>David Meguira</strong>
         </h2>
-        <h3 className="text-3xl font-caption">Full Stack Developer</h3>
+        <h3 className="text-3xl font-caption"><strong>Développeur Full Stack</strong></h3>
         <p className="text-base">
-          Passionate about crafting beautiful and functional websites and
-          applications using technologies like
+          <strong>Passionné</strong> par la création de sites web et d'applications esthétiques et fonctionnelles en utilisant des technologies telles que
           <Code className="inline-flex items-center gap-1">
-            {" "}
             <NextIcon size={12} className="inline" />
-            Next.js
+            <strong>Next.js</strong>
           </Code>
           ,
           <Code>
             <LaravelIcon size={12} className="inline" />
-            Laravel
-          </Code>{" "}
-          and <br />
+            <strong>Laravel</strong>
+          </Code>
+          et
           <Code>
             <NodeJSIcon size={12} className="inline" />
-            Node.js
+            <strong>Node.js</strong>
           </Code>
-            . Currently pursuing a Master&apos;s degree in Web Engineering at
+          . Actuellement en <strong>Master</strong> en Ingénierie Web à
           <a
             href="https://www.esgi.fr/"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <strong className="text-primary text-decoration-underline"> ESGI</strong>
+            <strong className="text-primary underline"> l&#39;ESGI</strong>
           </a>
-          . Based in Paris,
-          <Code>
-            <img
-              src="https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/FR.svg"
-              width="20"
-              className="inline"
-            />{" "}
-            France
-          </Code>
-          . Actively seeking an alternance starting September 2025.
+          {" "}à Paris, je suis à la recherche d'une <strong>alternance</strong> pour <strong>Septembre 2025</strong>.
         </p>
         <ul className="flex items-center gap-2 w-full justify-end">
           <Link href="/CV2025FR.pdf" passHref legacyBehavior>
@@ -84,7 +73,7 @@ export const Hero = () => {
               rel="noopener noreferrer"
               className={cn(buttonVariants({ variant: "default" }), "w-36 p-3")}
             >
-              Download CV
+              <strong>Télécharger CV</strong>
               <svg
                 width="18px"
                 height="18px"
@@ -117,7 +106,7 @@ export const Hero = () => {
                 "w-32 p-3 gap-1"
               )}
             >
-              View CV
+              <strong>Voir CV</strong>
               <svg
                 width="24px"
                 height="24px"
@@ -145,6 +134,12 @@ export const Hero = () => {
             </a>
           </Link>
         </ul>
+        {/* <div className="mt-4 p-4 bg-gray-100 rounded-lg shadow-md">
+          <h4 className="text-xl font-bold text-secondary">Vous avez une mission ?</h4>
+          <p className="text-base text-secondary">
+        N'hésitez pas à me contacter pour discuter de vos projets et voir comment je peux vous aider à les réaliser.
+          </p>
+        </div> */}
       </div>
     </Section>
   );

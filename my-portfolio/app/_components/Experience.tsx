@@ -1,6 +1,6 @@
 "use client";
 
-import { ComponentPropsWithoutRef, useState } from "react";
+import { ComponentPropsWithoutRef, useState, useRef, useEffect } from "react";
 import { Section } from "./Section";
 import { MotionWrapper } from "./MotionWrapper";
 import { Code } from "./Code";
@@ -9,6 +9,7 @@ import Image from "next/image";
 
 interface ExperienceProps {
   company: { name: string; logo: string };
+  url?: string;
   role: string;
   startDate: string;
   endDate: string;
@@ -22,6 +23,7 @@ export const Experience = (
 ) => {
   const {
     company,
+    url,
     role,
     startDate,
     endDate,
@@ -32,50 +34,90 @@ export const Experience = (
   } = props;
 
   const [showDetails, setShowDetails] = useState(false);
+  const [height, setHeight] = useState("0px");
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (contentRef.current) {
+      setHeight(showDetails ? `${contentRef.current.scrollHeight}px` : "0px");
+    }
+  }, [showDetails]);
+
   return (
     <MotionWrapper from="left">
-      <Section
-        className="flex flex-col gap-4 max-w-full w-full mx-auto px-3 py-2 bg-card text-card-foreground shadow-lg rounded-md border border-border"
-        {...divProps}
-      >
-        <div className="flex flex-row gap-2 items-center">
-          { company.logo ? <Image
-              src={company.logo}
-              alt={company.name}
-              width={34}
-              height={34}
-              className="rounded-md bg-primary h-max w-max"
-            /> : null }
-          <div className="flex flex-col w-full gap-1">
-            <div className=" flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <h2 className="text-base font-bold text-primary">
-                  {company.name}
-                </h2>
-                <p className="text-xs p-1 bg-popover text-ring border border-ring rounded-full hover:shadow-lg cursor-default w-max">
-                  {startDate} - {endDate}
-                </p>
+      <div onClick={() => setShowDetails(!showDetails)}>
+        <Section
+          className="flex flex-col gap-2 max-w-full w-full mx-auto px-2 py-1 bg-card text-card-foreground shadow-lg rounded-md border border-border cursor-pointer"
+          {...divProps}
+        >
+          <div className="flex flex-row gap-2 items-center">
+            {company.logo ? (
+              url ? (
+              <a href={url} target="_blank" rel="noopener noreferrer">
+                <Image
+                src={company.logo}
+                alt={company.name}
+                width={26}
+                height={26}
+                className="rounded-md bg-primary h-max w-max"
+                />
+              </a>
+              ) : (
+              <Image
+                src={company.logo}
+                alt={company.name}
+                width={26}
+                height={26}
+                className="rounded-md bg-primary h-max w-max"
+              />
+              )
+            ) : null}
+            <div className="flex flex-col w-full gap-1">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <h2 className="text-sm font-bold text-primary">
+                    {company.name}
+                  </h2>
+                  <h3 className="text-xs font-semibold">{role}</h3>
+                </div>
+                <div className="flex items-center">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setShowDetails(!showDetails);
+                    }}
+                    className="focus:outline-none"
+                  >
+                    {showDetails ? (
+                      <FaChevronUp className="text-primary" />
+                    ) : (
+                      <FaChevronDown className="text-primary" />
+                    )}
+                  </button>
+                </div>
               </div>
-              <button
-                onClick={() => setShowDetails(!showDetails)}
-                className="focus:outline-none"
-              >
-                {showDetails ? (
-                  <FaChevronUp className="text-primary" />
-                ) : (
-                  <FaChevronDown className="text-primary" />
-                )}
-              </button>
+              <p className="text-xs text-ring">
+                {startDate} - {endDate}
+              </p>
             </div>
-            <h3 className="text-xs font-semibold">{role}</h3>
           </div>
-        </div>
-        {showDetails && (
-          <>
-            <p className="text-xs leading-6 text-foreground">{description}</p>
-            <div className="mt-2">
-              <h4 className="text-sm font-semibold mb-1">Technologies Used</h4>
-              <ul className="flex flex-wrap gap-2">
+          <div
+            ref={contentRef}
+            style={{
+              maxHeight: height,
+              transition: "max-height 0.3s ease",
+              overflow: "hidden",
+            }}
+          >
+            <p
+              className="text-xs leading-5 text-foreground"
+              dangerouslySetInnerHTML={{ __html: description }}
+            />
+            <div className="mt-1">
+              <h4 className="text-xs font-semibold mb-1">
+                Technologies Utilisées
+              </h4>
+              <ul className="flex flex-wrap gap-1">
                 {technologies.map((tech, index) => (
                   <li key={index} className="flex items-center text-xs">
                     <Code logo={tech.logo} name={tech.name} />
@@ -83,22 +125,22 @@ export const Experience = (
                 ))}
               </ul>
             </div>
-            <div className="mt-2">
-              <h4 className="text-sm font-semibold mb-1">Skills Developed</h4>
-              <ul className="flex flex-wrap gap-2">
+            <div className="mt-1">
+              <h4 className="text-xs font-semibold mb-1">Skills développées</h4>
+              <ul className="flex flex-wrap gap-1">
                 {skillsWorkedOn.map((skill, index) => (
                   <li
                     key={index}
-                    className="bg-popover text-popover-foreground p-1 rounded-md text-xs"
+                    className="bg-popover text-foreground p-1 rounded-md text-xs"
                   >
                     {skill}
                   </li>
                 ))}
               </ul>
             </div>
-          </>
-        )}
-      </Section>
+          </div>
+        </Section>
+      </div>
     </MotionWrapper>
   );
 };

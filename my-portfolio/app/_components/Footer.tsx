@@ -9,10 +9,10 @@ export const Footer = () => {
     <footer className="bg-[var(--background)] text-[var(--foreground)] py-4">
       <Section className="flex flex-col items-center">
         <p className="text-center">
-          Developed by David Meguira
+          Développé par David Meguira
         </p>
         <p className="text-center">
-          Built with Next.js, TypeScript, and Tailwind CSS
+          Construit avec Next.js, TypeScript et Tailwind CSS
         </p>
         <div className="flex gap-2 mt-2">
           <Link href="https://github.com/Daruiii" passHref legacyBehavior>

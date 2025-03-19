@@ -68,7 +68,7 @@ export const Skills = () => {
   return (
     <Section className="flex flex-col items-start space-y-8">
       <h2 className="font-caption font-bold text-5xl text-primary">
-        My Skills
+        Skills
       </h2>
       <div className="overflow-hidden flex flex-row items-center justify-center bg-popover p-4 rounded-lg max-w-full h-16">
         <InfiniteScroll speed={20} direction="left">

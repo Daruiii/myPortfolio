@@ -51,50 +51,7 @@ export const Project = (
         className={`flex ${alignmentStyles} max-md:flex-col items-start gap-4`}
         {...divProps}
       >
-        {image ? (
-          <div
-            style={{ top: 70, zIndex: 0 }}
-            className="sticky-md static md:sticky flex-3 max-md:m-auto mr-auto space-y-4 w-full md:w-2/3"
-          >
-            <div className="w-full h-64 flex-shrink-0 relative">
-              {sourceLink ? (
-                <Link href={sourceLink} passHref>
-                  <Image
-                    src={image}
-                    alt={name}
-                    layout="fill"
-                    objectFit="cover"
-                    className="w-full h-auto max-w-lg rounded-sm max-md:w-full"
-                    draggable={false}
-                  />
-                </Link>
-              ) : (
-                <Image
-                  src={image}
-                  alt={name}
-                  layout="fill"
-                  objectFit="cover"
-                  className="w-full h-auto max-w-lg rounded-sm max-md:w-full"
-                  draggable={false}
-                />
-              )}
-            </div>
-          </div>
-        ) : (
-          <div
-            style={{ top: 70, zIndex: 0 }}
-            className="sticky-md static md:sticky flex-3 max-md:m-auto mr-auto space-y-4 w-full md:w-2/3"
-          >
-            {sourceLink ? (
-              <Link href={sourceLink} passHref>
-                <Carousel images={images} />
-              </Link>
-            ) : (
-              <Carousel images={images} />
-            )}
-          </div>
-        )}
-        <div className="flex-[2] flex flex-col gap-2">
+             <div className="flex-[2] flex flex-col gap-2">
           <div className="flex gap-2 items-center">
             <h2 className="font-bold text-2xl text-primary">{name}</h2>
             {logo && (
@@ -168,6 +125,49 @@ export const Project = (
             )}
           </div>
         </div>
+        {image ? (
+          <div
+            style={{ top: 70, zIndex: 0 }}
+            className="sticky-md static md:sticky flex-3 max-md:m-auto mr-auto space-y-4 w-full md:w-2/3"
+          >
+            <div className="w-full h-64 flex-shrink-0 relative">
+              {sourceLink ? (
+                <Link href={sourceLink} passHref>
+                  <Image
+                    src={image}
+                    alt={name}
+                    layout="fill"
+                    objectFit="contain"
+                    className="w-full h-auto max-w-lg rounded-sm max-md:w-full"
+                    draggable={false}
+                  />
+                </Link>
+              ) : (
+                <Image
+                  src={image}
+                  alt={name}
+                  layout="fill"
+                  objectFit="contain"
+                  className="w-full h-auto max-w-lg rounded-sm max-md:w-full"
+                  draggable={false}
+                />
+              )}
+            </div>
+          </div>
+        ) : (
+          <div
+            style={{ top: 70, zIndex: 0 }}
+            className="sticky-md static md:sticky flex-3 max-md:m-auto mr-auto space-y-4 w-full md:w-2/3"
+          >
+            {sourceLink ? (
+              <Link href={sourceLink} passHref>
+                <Carousel images={images} />
+              </Link>
+            ) : (
+              <Carousel images={images} />
+            )}
+          </div>
+        )}
       </Section>
     </MotionWrapper>
   );

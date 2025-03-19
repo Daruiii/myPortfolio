@@ -12,16 +12,16 @@ return (
   <main>
     <Header />
     <div id="hero"></div>
-    <Spacing size="md" />
+    <Spacing size="sm" />
     <Hero />
     <div id="projects"></div>
     <Spacing size="sm" />
     <Projects />
     <div id="skills"></div>
-    <Spacing size="md" />
+    <Spacing size="sm" />
     <Skills />
     <div id="about-me"></div>
-    <Spacing size="md" />
+    <Spacing size="sm" />
     <AboutMe />
     <Footer />
   </main>
