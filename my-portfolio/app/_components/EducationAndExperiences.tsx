@@ -12,6 +12,7 @@ import { ThreeJSIcon } from "./icons/ThreeJSIcon";
 import { JsonIcon } from "./icons/JsonIcon";
 import { GA4Icon } from "./icons/GA4Icon";
 import { WordPressIcon } from "./icons/WordPressIcon";
+import { SeoTools } from "./icons/SeoTools";
 
 export const EducationAndExperiences = () => {
   const experiences = [
@@ -35,7 +36,7 @@ export const EducationAndExperiences = () => {
         },
         {
           name: "Outils SEO",
-          logo: <JavascriptIcon size={12} className="text-foreground" />,
+          logo: <SeoTools size={12} className="text-foreground" />,
         }
       ],
       skillsWorkedOn: [
