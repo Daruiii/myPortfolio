@@ -28,7 +28,7 @@ export const Hero = () => {
     <Section className="flex max-md:flex-col items-start gap-4">
       <div className="flex-1 max-md:m-auto ml-auto sticky-md md:sticky top-16">
         <Image
-          src="/images/HeroPics.JPEG"
+          src="/images/HeroPics2.JPEG"
           alt="Image Héro"
           width={200}
           height={200}
