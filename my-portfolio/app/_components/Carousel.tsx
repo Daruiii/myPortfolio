@@ -10,9 +10,10 @@ const AUTO_DELAY = 3500;
 
 type CarouselProps = ComponentPropsWithoutRef<"div"> & {
   images: string[];
+  priority?: boolean;
 };
 
-export const Carousel = ({ images, className, ...props }: CarouselProps) => {
+export const Carousel = ({ images, priority = false, className, ...props }: CarouselProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [hovered, setHovered] = useState(false);
@@ -116,7 +117,7 @@ export const Carousel = ({ images, className, ...props }: CarouselProps) => {
         onMouseLeave={() => setHovered(false)}
         {...props}
       >
-        <div className="w-full h-64 relative cursor-zoom-in" onClick={() => setLightboxOpen(true)}>
+        <div className="w-full h-64 cursor-zoom-in" style={{ position: "relative" }} onClick={() => setLightboxOpen(true)}>
           {images.map((src, i) => (
             <Image
               key={src}
@@ -124,6 +125,7 @@ export const Carousel = ({ images, className, ...props }: CarouselProps) => {
               alt={`Screenshot ${i + 1}`}
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
+              priority={priority && i === 0}
               className={cn(
                 "object-contain rounded-sm transition-opacity duration-500",
                 i === currentIndex ? "opacity-100" : "opacity-0"

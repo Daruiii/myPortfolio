@@ -21,6 +21,7 @@ interface ProjectData {
   githubLink: string;
   teamSize: number;
   align?: "left" | "right";
+  priority?: boolean;
 }
 
 export const Project = (props: ComponentPropsWithoutRef<"div"> & ProjectData) => {
@@ -37,6 +38,7 @@ export const Project = (props: ComponentPropsWithoutRef<"div"> & ProjectData) =>
     githubLink,
     teamSize,
     align = "left",
+    priority = false,
     ...divProps
   } = props;
 
@@ -108,7 +110,7 @@ export const Project = (props: ComponentPropsWithoutRef<"div"> & ProjectData) =>
           className="md:sticky flex-3 max-md:m-auto mr-auto space-y-4 w-full md:w-2/3"
         >
           {image ? (
-            <div className="relative w-full h-64">
+            <div className="w-full h-64" style={{ position: "relative" }}>
               <Image
                 src={image}
                 alt={name}
@@ -119,7 +121,7 @@ export const Project = (props: ComponentPropsWithoutRef<"div"> & ProjectData) =>
               />
             </div>
           ) : (
-            <Carousel images={images} />
+            <Carousel images={images} priority={priority} />
           )}
         </div>
       </Section>

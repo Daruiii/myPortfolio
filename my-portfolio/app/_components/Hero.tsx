@@ -24,6 +24,7 @@ export const Hero = () => {
           alt="David Meguira"
           width={200}
           height={200}
+          priority
           className="rounded-full object-cover"
         />
       </div>

@@ -60,6 +60,7 @@ export const Projects = () => {
           githubLink="https://github.com/Daruiii/maths-manager"
           teamSize={1}
           align="right"
+          priority
         />
         <Project
           image=""
