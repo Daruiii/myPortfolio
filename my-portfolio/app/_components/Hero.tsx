@@ -69,7 +69,7 @@ export const Hero = () => {
           depuis <strong>Novembre 2025</strong>.
         </p>
         <ul className="flex items-center gap-2 w-full justify-end">
-          <Link
+          <a
             href="/CV2026FR.pdf"
             download
             target="_blank"
@@ -83,8 +83,8 @@ export const Hero = () => {
                 fill="currentColor"
               />
             </svg>
-          </Link>
-          <Link
+          </a>
+          <a
             href="/CV2026FR.pdf"
             target="_blank"
             rel="noopener noreferrer"
@@ -100,7 +100,7 @@ export const Hero = () => {
                 strokeLinejoin="round"
               />
             </svg>
-          </Link>
+          </a>
         </ul>
       </div>
     </Section>
