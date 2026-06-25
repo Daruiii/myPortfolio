@@ -1,9 +1,8 @@
-// sert a définir une largeur max
-import { PropsWithChildren } from "react";
+import { ComponentPropsWithoutRef } from "react";
 import { cn } from "@/lib/utils";
 
-export const Section = (props: PropsWithChildren<{ className?: string }>) => {
-    return <section className={cn("max-w-4xl mx-auto px-4", props.className)}>
-        {props.children}
-        </section>
-}
+export const Section = ({ className, children, ...props }: ComponentPropsWithoutRef<"section">) => (
+  <section className={cn("max-w-4xl mx-auto px-4", className)} {...props}>
+    {children}
+  </section>
+);

@@ -1,49 +1,48 @@
 "use client";
 
-import React, { useEffect, useRef } from 'react';
-import { motion, useAnimation } from 'framer-motion';
-import { ComponentPropsWithoutRef } from 'react';
+import { ComponentPropsWithoutRef, useLayoutEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 
-interface InfiniteScrollProps extends ComponentPropsWithoutRef<'div'> {
-  speed?: number; // in seconds
-  direction?: 'left' | 'right'; // scroll direction
+interface InfiniteScrollProps extends ComponentPropsWithoutRef<"div"> {
+  speed?: number;
+  direction?: "left" | "right";
 }
 
-export const InfiniteScroll: React.FC<InfiniteScrollProps> = ({ children, speed = 20, direction = 'left', className, ...props }) => {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const controls = useAnimation();
+const GAP_PX = 48; // gap-12 = 3rem = 48px
 
-  useEffect(() => {
-    const scrollWidth = scrollRef.current ? scrollRef.current.scrollWidth / 2 : 0;
-    const animateScroll = () => {
-      controls.set({ x: direction === 'left' ? 0 : -scrollWidth });
-      controls.start({
-        x: direction === 'left' ? -scrollWidth : 0,
-        transition: {
-          x: {
-            repeat: Infinity,
-            repeatType: 'loop',
-            duration: speed,
-            ease: 'linear',
-          },
-        },
-      });
-    };
-    animateScroll();
-  }, [controls, speed, direction]);
+export const InfiniteScroll = ({
+  children,
+  speed = 20,
+  direction = "left",
+  className,
+  ...props
+}: InfiniteScrollProps) => {
+  const firstRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    if (!firstRef.current || !trackRef.current) return;
+    const w = firstRef.current.offsetWidth + GAP_PX;
+    trackRef.current.style.setProperty("--scroll-w", `${w}px`);
+  }, []);
 
   return (
-    <div className={cn("overflow-hidden relative w-full flex", className)} {...props}>
-      <motion.div
-        ref={scrollRef}
-        className="flex gap-12"
-        animate={controls}
-        style={{ display: 'flex', width: 'max-content' }}
+    <div className={cn("overflow-hidden relative w-full", className)} {...props}>
+      <div
+        ref={trackRef}
+        style={{
+          display: "flex",
+          gap: `${GAP_PX}px`,
+          width: "max-content",
+          animation: `infinite-scroll ${speed}s linear infinite`,
+          animationDirection: direction === "right" ? "reverse" : "normal",
+        }}
       >
-        {children}
-        {children} {/* Duplicate the children for smooth looping */}
-      </motion.div>
+        <div ref={firstRef} style={{ display: "flex", gap: `${GAP_PX}px` }}>
+          {children}
+        </div>
+        <div style={{ display: "flex", gap: `${GAP_PX}px` }}>{children}</div>
+      </div>
     </div>
   );
 };

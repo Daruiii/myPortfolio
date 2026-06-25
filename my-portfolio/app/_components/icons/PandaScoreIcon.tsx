@@ -1,7 +1,7 @@
-import { ComponentPropsWithoutRef, ComponentType } from "react";
+import { ComponentPropsWithoutRef } from "react";
 import Image from "next/image";
 
-type ImageProps = Omit<ComponentPropsWithoutRef<typeof Image>, 'src' | 'alt'>;
+type ImageProps = Omit<ComponentPropsWithoutRef<typeof Image>, "src" | "alt">;
 
 interface ESGIIconProps extends ImageProps {
   size?: number;
@@ -9,12 +9,12 @@ interface ESGIIconProps extends ImageProps {
 
 export const PandaScoreIcon = ({ size = 40, ...props }: ESGIIconProps) => {
   return (
-    <Image 
-      src="https://asset.brandfetch.io/idvHNWkW1x/idNGPJJzmC.jpeg" 
+    <Image
+      src="https://asset.brandfetch.io/idvHNWkW1x/idNGPJJzmC.jpeg"
       alt="PandaScoreApi"
-      width={size} 
-      height={size} 
-      {...props} 
+      width={size}
+      height={size}
+      {...props}
     />
   );
 };
