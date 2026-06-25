@@ -84,6 +84,7 @@ export const Carousel = ({ images, className, ...props }: CarouselProps) => {
           src={images[currentIndex]}
           alt={`Screenshot ${currentIndex + 1}`}
           fill
+          sizes="90vw"
           className="object-contain"
           draggable={false}
         />
@@ -122,6 +123,7 @@ export const Carousel = ({ images, className, ...props }: CarouselProps) => {
               src={src}
               alt={`Screenshot ${i + 1}`}
               fill
+              sizes="(max-width: 768px) 100vw, 50vw"
               className={cn(
                 "object-contain rounded-sm transition-opacity duration-500",
                 i === currentIndex ? "opacity-100" : "opacity-0"

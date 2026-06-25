@@ -105,7 +105,7 @@ export const Project = (props: ComponentPropsWithoutRef<"div"> & ProjectData) =>
         </div>
         <div
           style={{ top: 70, zIndex: 0 }}
-          className="sticky-md static md:sticky flex-3 max-md:m-auto mr-auto space-y-4 w-full md:w-2/3"
+          className="md:sticky flex-3 max-md:m-auto mr-auto space-y-4 w-full md:w-2/3"
         >
           {image ? (
             <div className="relative w-full h-64">
@@ -113,6 +113,7 @@ export const Project = (props: ComponentPropsWithoutRef<"div"> & ProjectData) =>
                 src={image}
                 alt={name}
                 fill
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-contain rounded-sm"
                 draggable={false}
               />
