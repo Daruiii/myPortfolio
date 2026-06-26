@@ -1,12 +1,13 @@
 "use client";
 
-import { ComponentPropsWithoutRef, useCallback, useEffect, useState } from "react";
+import { ComponentPropsWithoutRef, useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { FaChevronLeft, FaChevronRight, FaTimes } from "react-icons/fa";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 const AUTO_DELAY = 3500;
+const SWIPE_THRESHOLD = 40;
 
 type CarouselProps = ComponentPropsWithoutRef<"div"> & {
   images: string[];
@@ -17,6 +18,7 @@ export const Carousel = ({ images, priority = false, className, ...props }: Caro
   const [currentIndex, setCurrentIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [hovered, setHovered] = useState(false);
+  const touchStartX = useRef<number | null>(null);
 
   const prev = useCallback(() => {
     setCurrentIndex((i) => (i - 1 + images.length) % images.length);
@@ -45,10 +47,25 @@ export const Carousel = ({ images, priority = false, className, ...props }: Caro
 
   if (images.length === 0) return null;
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const delta = touchStartX.current - e.changedTouches[0].clientX;
+    if (Math.abs(delta) >= SWIPE_THRESHOLD) {
+      delta > 0 ? next() : prev();
+    }
+    touchStartX.current = null;
+  };
+
   const lightbox = (
     <div
       className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm"
       onClick={() => setLightboxOpen(false)}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
     >
       <button
         className="absolute top-4 right-4 text-white bg-black/50 hover:bg-black/70 rounded-full p-2"
@@ -61,19 +78,13 @@ export const Carousel = ({ images, priority = false, className, ...props }: Caro
         <>
           <button
             className="absolute left-4 text-white bg-black/50 hover:bg-black/70 rounded-full p-3"
-            onClick={(e) => {
-              e.stopPropagation();
-              prev();
-            }}
+            onClick={(e) => { e.stopPropagation(); prev(); }}
           >
             <FaChevronLeft size={20} />
           </button>
           <button
             className="absolute right-4 text-white bg-black/50 hover:bg-black/70 rounded-full p-3"
-            onClick={(e) => {
-              e.stopPropagation();
-              next();
-            }}
+            onClick={(e) => { e.stopPropagation(); next(); }}
           >
             <FaChevronRight size={20} />
           </button>
@@ -95,10 +106,7 @@ export const Carousel = ({ images, priority = false, className, ...props }: Caro
         {images.map((_, i) => (
           <button
             key={i}
-            onClick={(e) => {
-              e.stopPropagation();
-              setCurrentIndex(i);
-            }}
+            onClick={(e) => { e.stopPropagation(); setCurrentIndex(i); }}
             className={cn(
               "h-1.5 rounded-full transition-all",
               i === currentIndex ? "w-4 bg-white" : "w-1.5 bg-white/40"
@@ -117,7 +125,13 @@ export const Carousel = ({ images, priority = false, className, ...props }: Caro
         onMouseLeave={() => setHovered(false)}
         {...props}
       >
-        <div className="w-full h-64 cursor-zoom-in" style={{ position: "relative" }} onClick={() => setLightboxOpen(true)}>
+        <div
+          className="w-full h-52 md:h-64 cursor-zoom-in"
+          style={{ position: "relative" }}
+          onClick={() => setLightboxOpen(true)}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
           {images.map((src, i) => (
             <Image
               key={src}
@@ -138,34 +152,28 @@ export const Carousel = ({ images, priority = false, className, ...props }: Caro
         {images.length > 1 && (
           <>
             <button
-              onClick={(e) => {
-                e.stopPropagation();
-                prev();
-              }}
-              className="absolute left-1 top-[calc(50%-12px)] -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-1.5 opacity-0 group-hover:opacity-100 transition-opacity"
+              onClick={(e) => { e.stopPropagation(); prev(); }}
+              className="absolute left-1 top-[calc(50%-20px)] -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 md:opacity-0 md:group-hover:opacity-100 transition-opacity"
             >
-              <FaChevronLeft size={12} />
+              <FaChevronLeft size={14} />
             </button>
             <button
-              onClick={(e) => {
-                e.stopPropagation();
-                next();
-              }}
-              className="absolute right-1 top-[calc(50%-12px)] -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-1.5 opacity-0 group-hover:opacity-100 transition-opacity"
+              onClick={(e) => { e.stopPropagation(); next(); }}
+              className="absolute right-1 top-[calc(50%-20px)] -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 md:opacity-0 md:group-hover:opacity-100 transition-opacity"
             >
-              <FaChevronRight size={12} />
+              <FaChevronRight size={14} />
             </button>
           </>
         )}
 
-        <div className="flex justify-center mt-2 gap-1.5">
+        <div className="flex justify-center mt-2 gap-2">
           {images.map((_, i) => (
             <button
               key={i}
               onClick={() => setCurrentIndex(i)}
               className={cn(
-                "h-1.5 rounded-full transition-all",
-                i === currentIndex ? "w-4 bg-primary" : "w-1.5 bg-border"
+                "h-2 rounded-full transition-all",
+                i === currentIndex ? "w-5 bg-primary" : "w-2 bg-border"
               )}
             />
           ))}

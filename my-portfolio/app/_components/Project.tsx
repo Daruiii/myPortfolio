@@ -50,7 +50,7 @@ export const Project = (props: ComponentPropsWithoutRef<"div"> & ProjectData) =>
         className={`flex ${alignmentStyles} max-md:flex-col items-start gap-4`}
         {...divProps}
       >
-        <div className="flex-[2] flex flex-col gap-2">
+        <div className="flex-[2] flex flex-col gap-2 max-md:order-2">
           <div className="flex gap-2 items-center">
             <h2 className="font-bold text-2xl text-primary">{name}</h2>
             {logo && (
@@ -87,7 +87,7 @@ export const Project = (props: ComponentPropsWithoutRef<"div"> & ProjectData) =>
               </li>
             ))}
           </ul>
-          <div className="flex gap-2 w-full items-end justify-center h-16">
+          <div className="flex gap-2 w-full items-center justify-center mt-2">
             {sourceLink && (
               <Button asChild variant="default" size="default">
                 <Link href={sourceLink} target="_blank" rel="noopener noreferrer">
@@ -107,7 +107,7 @@ export const Project = (props: ComponentPropsWithoutRef<"div"> & ProjectData) =>
         </div>
         <div
           style={{ top: 70, zIndex: 0 }}
-          className="md:sticky flex-3 max-md:m-auto mr-auto space-y-4 w-full md:w-2/3"
+          className="md:sticky max-md:order-1 flex-3 w-full md:w-2/3"
         >
           {image ? (
             <div className="w-full h-64" style={{ position: "relative" }}>
