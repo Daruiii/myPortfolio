@@ -18,21 +18,18 @@ export const Carousel = ({ images, priority = false, className, ...props }: Caro
   const [currentIndex, setCurrentIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [hovered, setHovered] = useState(false);
+  const [dragOffset, setDragOffset] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
   const touchStartX = useRef<number | null>(null);
 
-  const prev = useCallback(() => {
-    setCurrentIndex((i) => (i - 1 + images.length) % images.length);
-  }, [images.length]);
-
-  const next = useCallback(() => {
-    setCurrentIndex((i) => (i + 1) % images.length);
-  }, [images.length]);
+  const prev = useCallback(() => setCurrentIndex((i) => (i - 1 + images.length) % images.length), [images.length]);
+  const next = useCallback(() => setCurrentIndex((i) => (i + 1) % images.length), [images.length]);
 
   useEffect(() => {
-    if (images.length <= 1 || hovered || lightboxOpen) return;
+    if (images.length <= 1 || hovered || lightboxOpen || isDragging) return;
     const id = setInterval(next, AUTO_DELAY);
     return () => clearInterval(id);
-  }, [images.length, hovered, lightboxOpen, next]);
+  }, [images.length, hovered, lightboxOpen, isDragging, next]);
 
   useEffect(() => {
     if (!lightboxOpen) return;
@@ -47,15 +44,34 @@ export const Carousel = ({ images, priority = false, className, ...props }: Caro
 
   if (images.length === 0) return null;
 
-  const handleTouchStart = (e: React.TouchEvent) => {
+  const onTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
+    setIsDragging(true);
   };
 
-  const handleTouchEnd = (e: React.TouchEvent) => {
+  const onTouchMove = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    setDragOffset(e.touches[0].clientX - touchStartX.current);
+  };
+
+  const onTouchEnd = (e: React.TouchEvent) => {
     if (touchStartX.current === null) return;
     const delta = touchStartX.current - e.changedTouches[0].clientX;
     if (Math.abs(delta) >= SWIPE_THRESHOLD) {
       delta > 0 ? next() : prev();
+    }
+    setDragOffset(0);
+    setIsDragging(false);
+    touchStartX.current = null;
+  };
+
+  const onLightboxTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const delta = touchStartX.current - e.changedTouches[0].clientX;
+    if (Math.abs(delta) >= SWIPE_THRESHOLD) {
+      delta > 0 ? next() : prev();
+    } else {
+      setLightboxOpen(false);
     }
     touchStartX.current = null;
   };
@@ -64,26 +80,26 @@ export const Carousel = ({ images, priority = false, className, ...props }: Caro
     <div
       className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm"
       onClick={() => setLightboxOpen(false)}
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
+      onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX; }}
+      onTouchEnd={onLightboxTouchEnd}
     >
       <button
-        className="absolute top-4 right-4 text-white bg-black/50 hover:bg-black/70 rounded-full p-2"
+        className="absolute top-4 right-4 text-white bg-black/50 rounded-full p-3 z-10"
         onClick={() => setLightboxOpen(false)}
       >
-        <FaTimes size={16} />
+        <FaTimes size={18} />
       </button>
 
       {images.length > 1 && (
         <>
           <button
-            className="absolute left-4 text-white bg-black/50 hover:bg-black/70 rounded-full p-3"
+            className="absolute left-4 text-white bg-black/50 hover:bg-black/70 rounded-full p-3 z-10"
             onClick={(e) => { e.stopPropagation(); prev(); }}
           >
             <FaChevronLeft size={20} />
           </button>
           <button
-            className="absolute right-4 text-white bg-black/50 hover:bg-black/70 rounded-full p-3"
+            className="absolute right-4 text-white bg-black/50 hover:bg-black/70 rounded-full p-3 z-10"
             onClick={(e) => { e.stopPropagation(); next(); }}
           >
             <FaChevronRight size={20} />
@@ -102,15 +118,12 @@ export const Carousel = ({ images, priority = false, className, ...props }: Caro
         />
       </div>
 
-      <div className="absolute bottom-4 flex gap-2">
+      <div className="absolute bottom-6 flex gap-2">
         {images.map((_, i) => (
           <button
             key={i}
             onClick={(e) => { e.stopPropagation(); setCurrentIndex(i); }}
-            className={cn(
-              "h-1.5 rounded-full transition-all",
-              i === currentIndex ? "w-4 bg-white" : "w-1.5 bg-white/40"
-            )}
+            className={cn("h-2 rounded-full transition-all", i === currentIndex ? "w-5 bg-white" : "w-2 bg-white/40")}
           />
         ))}
       </div>
@@ -126,27 +139,34 @@ export const Carousel = ({ images, priority = false, className, ...props }: Caro
         {...props}
       >
         <div
-          className="w-full h-52 md:h-64 cursor-zoom-in"
-          style={{ position: "relative" }}
-          onClick={() => setLightboxOpen(true)}
-          onTouchStart={handleTouchStart}
-          onTouchEnd={handleTouchEnd}
+          className="w-full h-52 md:h-64 overflow-hidden cursor-zoom-in rounded-sm"
+          onClick={() => !isDragging && setLightboxOpen(true)}
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
         >
-          {images.map((src, i) => (
-            <Image
-              key={src}
-              src={src}
-              alt={`Screenshot ${i + 1}`}
-              fill
-              sizes="(max-width: 768px) 100vw, 50vw"
-              priority={priority && i === 0}
-              className={cn(
-                "object-contain rounded-sm transition-opacity duration-500",
-                i === currentIndex ? "opacity-100" : "opacity-0"
-              )}
-              draggable={false}
-            />
-          ))}
+          <div
+            className="flex h-full"
+            style={{
+              transform: `translateX(calc(-${currentIndex * 100}% + ${dragOffset}px))`,
+              transition: isDragging ? "none" : "transform 0.3s ease",
+              willChange: "transform",
+            }}
+          >
+            {images.map((src, i) => (
+              <div key={src} className="flex-none w-full h-full" style={{ position: "relative" }}>
+                <Image
+                  src={src}
+                  alt={`Screenshot ${i + 1}`}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  priority={priority && i === 0}
+                  className="object-contain"
+                  draggable={false}
+                />
+              </div>
+            ))}
+          </div>
         </div>
 
         {images.length > 1 && (
@@ -171,10 +191,7 @@ export const Carousel = ({ images, priority = false, className, ...props }: Caro
             <button
               key={i}
               onClick={() => setCurrentIndex(i)}
-              className={cn(
-                "h-2 rounded-full transition-all",
-                i === currentIndex ? "w-5 bg-primary" : "w-2 bg-border"
-              )}
+              className={cn("h-2 rounded-full transition-all", i === currentIndex ? "w-5 bg-primary" : "w-2 bg-border")}
             />
           ))}
         </div>
