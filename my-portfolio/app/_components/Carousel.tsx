@@ -20,6 +20,8 @@ export const Carousel = ({ images, priority = false, className, ...props }: Caro
   const [hovered, setHovered] = useState(false);
   const [dragOffset, setDragOffset] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
+  const [lightboxDrag, setLightboxDrag] = useState(0);
+  const [isLightboxDragging, setIsLightboxDragging] = useState(false);
   const touchStartX = useRef<number | null>(null);
 
   const prev = useCallback(() => setCurrentIndex((i) => (i - 1 + images.length) % images.length), [images.length]);
@@ -57,22 +59,35 @@ export const Carousel = ({ images, priority = false, className, ...props }: Caro
   const onTouchEnd = (e: React.TouchEvent) => {
     if (touchStartX.current === null) return;
     const delta = touchStartX.current - e.changedTouches[0].clientX;
-    if (Math.abs(delta) >= SWIPE_THRESHOLD) {
-      delta > 0 ? next() : prev();
-    }
+    if (Math.abs(delta) >= SWIPE_THRESHOLD) delta > 0 ? next() : prev();
     setDragOffset(0);
     setIsDragging(false);
     touchStartX.current = null;
   };
 
+  const onLightboxTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    setIsLightboxDragging(false);
+  };
+
+  const onLightboxTouchMove = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const delta = e.touches[0].clientX - touchStartX.current;
+    setLightboxDrag(delta);
+    if (Math.abs(delta) > 5) setIsLightboxDragging(true);
+  };
+
   const onLightboxTouchEnd = (e: React.TouchEvent) => {
+    e.preventDefault();
     if (touchStartX.current === null) return;
     const delta = touchStartX.current - e.changedTouches[0].clientX;
     if (Math.abs(delta) >= SWIPE_THRESHOLD) {
       delta > 0 ? next() : prev();
-    } else {
+    } else if (!isLightboxDragging) {
       setLightboxOpen(false);
     }
+    setLightboxDrag(0);
+    setIsLightboxDragging(false);
     touchStartX.current = null;
   };
 
@@ -80,12 +95,13 @@ export const Carousel = ({ images, priority = false, className, ...props }: Caro
     <div
       className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm"
       onClick={() => setLightboxOpen(false)}
-      onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX; }}
+      onTouchStart={onLightboxTouchStart}
+      onTouchMove={onLightboxTouchMove}
       onTouchEnd={onLightboxTouchEnd}
     >
       <button
         className="absolute top-4 right-4 text-white bg-black/50 rounded-full p-3 z-10"
-        onClick={() => setLightboxOpen(false)}
+        onClick={(e) => { e.stopPropagation(); setLightboxOpen(false); }}
       >
         <FaTimes size={18} />
       </button>
@@ -93,13 +109,13 @@ export const Carousel = ({ images, priority = false, className, ...props }: Caro
       {images.length > 1 && (
         <>
           <button
-            className="absolute left-4 text-white bg-black/50 hover:bg-black/70 rounded-full p-3 z-10"
+            className="absolute left-4 text-white bg-black/50 hover:bg-black/70 rounded-full p-3 z-10 max-md:hidden"
             onClick={(e) => { e.stopPropagation(); prev(); }}
           >
             <FaChevronLeft size={20} />
           </button>
           <button
-            className="absolute right-4 text-white bg-black/50 hover:bg-black/70 rounded-full p-3 z-10"
+            className="absolute right-4 text-white bg-black/50 hover:bg-black/70 rounded-full p-3 z-10 max-md:hidden"
             onClick={(e) => { e.stopPropagation(); next(); }}
           >
             <FaChevronRight size={20} />
@@ -107,15 +123,31 @@ export const Carousel = ({ images, priority = false, className, ...props }: Caro
         </>
       )}
 
-      <div className="relative w-[90vw] h-[80vh] max-w-5xl" onClick={(e) => e.stopPropagation()}>
-        <Image
-          src={images[currentIndex]}
-          alt={`Screenshot ${currentIndex + 1}`}
-          fill
-          sizes="90vw"
-          className="object-contain"
-          draggable={false}
-        />
+      <div
+        className="w-[90vw] h-[80vh] max-w-5xl overflow-hidden"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div
+          className="flex h-full"
+          style={{
+            transform: `translateX(calc(-${currentIndex * 100}% + ${lightboxDrag}px))`,
+            transition: isLightboxDragging ? "none" : "transform 0.3s ease",
+            willChange: "transform",
+          }}
+        >
+          {images.map((src, i) => (
+            <div key={src} className="flex-none w-full h-full" style={{ position: "relative" }}>
+              <Image
+                src={src}
+                alt={`Screenshot ${i + 1}`}
+                fill
+                sizes="90vw"
+                className="object-contain"
+                draggable={false}
+              />
+            </div>
+          ))}
+        </div>
       </div>
 
       <div className="absolute bottom-6 flex gap-2">
@@ -170,20 +202,20 @@ export const Carousel = ({ images, priority = false, className, ...props }: Caro
         </div>
 
         {images.length > 1 && (
-          <>
+          <div className="max-md:hidden">
             <button
               onClick={(e) => { e.stopPropagation(); prev(); }}
-              className="absolute left-1 top-[calc(50%-20px)] -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 md:opacity-0 md:group-hover:opacity-100 transition-opacity"
+              className="absolute left-1 top-[calc(50%-20px)] -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity"
             >
               <FaChevronLeft size={14} />
             </button>
             <button
               onClick={(e) => { e.stopPropagation(); next(); }}
-              className="absolute right-1 top-[calc(50%-20px)] -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 md:opacity-0 md:group-hover:opacity-100 transition-opacity"
+              className="absolute right-1 top-[calc(50%-20px)] -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity"
             >
               <FaChevronRight size={14} />
             </button>
-          </>
+          </div>
         )}
 
         <div className="flex justify-center mt-2 gap-2">
