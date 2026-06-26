@@ -13,7 +13,7 @@ interface ProjectData {
   images: string[];
   name: string;
   logo: string;
-  description: string;
+  description: ReactNode;
   startDate: string;
   endDate: string;
   technologies: { name: string; logo: ReactNode }[];
@@ -79,7 +79,7 @@ export const Project = (props: ComponentPropsWithoutRef<"div"> & ProjectData) =>
               </svg>
             </div>
           </div>
-          <p className="text-xs" dangerouslySetInnerHTML={{ __html: description }} />
+          <p className="text-xs">{description}</p>
           <ul className="flex gap-1 flex-wrap">
             {technologies.map((tech) => (
               <li key={tech.name} className="text-xs">

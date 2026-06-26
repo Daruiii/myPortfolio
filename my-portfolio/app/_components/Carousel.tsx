@@ -192,7 +192,7 @@ export const Carousel = ({ images, priority = false, className, ...props }: Caro
                   alt={`Screenshot ${i + 1}`}
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
-                  priority={priority && i === 0}
+                  priority={priority && i <= 1}
                   className="object-contain"
                   draggable={false}
                 />
